@@ -3,6 +3,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
 
 import { menus } from './router.js'
+import SiteHeader from './components/SiteHeader.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -17,41 +18,37 @@ if (activePath === '/') {
 </script>
 
 <template>
-  <el-container
-      class="layout-container-demo"
-      style="height: 100vh; border: 1px solid #eee"
-  >
-    <el-header style="text-align: right; font-size: 12px">
-      <div class="toolbar">
-        <el-dropdown>
-          <el-icon style="margin-right: 8px; margin-top: 1px"
-          ><setting
-          /></el-icon>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item>View</el-dropdown-item>
-              <el-dropdown-item>Add</el-dropdown-item>
-              <el-dropdown-item>Delete</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-        <span>Tom</span>
-      </div>
+  <el-container class="layout-container-demo">
+    <el-header>
+      <SiteHeader />
     </el-header>
     <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-scrollbar>
           <el-menu :default-active="route.path" unique-opened router>
-            <el-menu-item v-for="menu in menus" :index="menu.path" :key="menu.path">
-              <template #title>
-                <el-icon>
-                  <message v-if="menu.iconName === 'message'" />
-                  <icon-menu v-if="menu.iconName === 'icon-menu'" />
-                  <setting v-if="menu.iconName === 'setting'" />
-                </el-icon>
-                {{ menu.name }}
-              </template>
-            </el-menu-item>
+            <template v-for="menu in menus" :key="menu.path">
+              <el-sub-menu v-if="menu.children.length > 0" :index="menu.path">
+                <template #title>
+                  <el-icon>
+                    <message v-if="menu.iconName === 'message'" />
+                    <icon-menu v-if="menu.iconName === 'icon-menu'" />
+                    <setting v-if="menu.iconName === 'setting'" />
+                  </el-icon>
+                  {{ menu.name }}
+                </template>
+                <el-menu-item v-for="subMenu in menu.children" :index="subMenu.path">{{ subMenu.name }}</el-menu-item>
+              </el-sub-menu>
+              <el-menu-item v-if="menu.children.length === 0" :index="menu.path">
+                <template #title>
+                  <el-icon>
+                    <message v-if="menu.iconName === 'message'" />
+                    <icon-menu v-if="menu.iconName === 'icon-menu'" />
+                    <setting v-if="menu.iconName === 'setting'" />
+                  </el-icon>
+                  {{ menu.name }}
+                </template>
+              </el-menu-item>
+            </template>
           </el-menu>
         </el-scrollbar>
       </el-aside>
@@ -66,9 +63,7 @@ if (activePath === '/') {
 
 <style scoped>
 .layout-container-demo .el-header {
-  position: relative;
-  background-color: #b3c0d1;
-  color: var(--el-text-color-primary);
+  padding: 0;
 }
 .layout-container-demo .el-aside {
   width: 240px;
@@ -82,13 +77,5 @@ if (activePath === '/') {
 }
 .layout-container-demo .el-main {
   padding: 0;
-}
-.layout-container-demo .toolbar {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
 }
 </style>

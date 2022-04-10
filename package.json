@@ -1,7 +1,7 @@
 {
   "name": "very-bugs",
   "version": "1.0.0",
-  "description": "在线Bug监控和上报系统。",
+  "description": "在线Bug监控和上报系统",
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap",
