@@ -1,12 +1,15 @@
 <script setup>
 import imgLogo from '../assets/logo.png'
+import { useSiteStore } from '../stores/useSiteStore.js'
+
+const site = useSiteStore()
 </script>
 
 <template>
   <div class="site-header">
     <a class="site-title-wrapper" href="/">
       <img :src="imgLogo" alt="" class="site-logo">
-      <h1 class="site-title">VeryBugs-在线bug监控和上报系统</h1>
+      <h1 class="site-title">{{ site.title }}-{{ site.desc }}</h1>
     </a>
     <div class="site-header-toolbar">
       <el-dropdown>
