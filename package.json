@@ -1,0 +1,27 @@
+{
+  "name": "very-bugs",
+  "version": "1.0.0",
+  "description": "在线Bug监控和上报系统。",
+  "main": "index.js",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "dev": "lerna run dev --parallel",
+    "build": "lerna run build --parallel",
+    "start": "lerna run start --parallel",
+    "publish": "lerna publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yakima-Teng/very-bugs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yakima-Teng/very-bugs/issues"
+  },
+  "homepage": "https://github.com/Yakima-Teng/very-bugs#readme",
+  "devDependencies": {
+    "lerna": "4.0.0"
+  }
+}
