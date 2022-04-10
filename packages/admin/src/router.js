@@ -28,6 +28,21 @@ const routes = [
     },
 ]
 
+const findRouteByPath = (targetPath, targetRoutes) => {
+    targetRoutes = targetRoutes || []
+    const targetRoute = targetRoutes.find((item) => item.path === targetPath)
+    if (targetRoute) {
+        return targetRoute
+    }
+    for (const route of targetRoutes) {
+        const foundRoute = findRouteByPath(targetPath, route.children)
+        if (foundRoute) {
+            return foundRoute
+        }
+    }
+    return null
+}
+
 const menusMapCallback = (item) => ({
     name: item.name,
     path: item.path,
@@ -43,4 +58,10 @@ export const router = createRouter({
         path: item.path,
         component: item.component,
     })),
+})
+
+router.afterEach((to, from, failure) => {
+    const toRouteConfig = findRouteByPath(to.path, routes)
+    // &#65279;是为了显示空标题，避免部分手机上在title为空时一开始会显示网址的问题
+    document.title = toRouteConfig?.name || '&#65279;'
 })
