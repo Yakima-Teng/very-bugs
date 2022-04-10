@@ -1,13 +1,5 @@
 <script setup>
-import { ref } from 'vue'
-
 import imgLogo from '../assets/logo.png'
-
-defineProps({
-  msg: String
-})
-
-const count = ref(0)
 </script>
 
 <template>
