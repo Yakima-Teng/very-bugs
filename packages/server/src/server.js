@@ -1,0 +1,17 @@
+const Koa = require('koa');
+const Router = require('@koa/router');
+
+const companyController = require('./controllers/company.js')
+
+const app = new Koa();
+const router = new Router();
+
+// 公司相关接口
+router.post('/companies', companyController.createCompany)
+router.get('/companies/:companyId', companyController.retrieveCompany)
+
+app
+    .use(router.routes())
+    .use(router.allowedMethods());
+
+app.listen(3000);

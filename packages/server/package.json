@@ -2,15 +2,16 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "README.md",
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js"
+    "dev": "node src/server.js",
+    "start": "npm run dev"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@koa/router": "10.1.1"
+  },
   "devDependencies": {
     "koa": "2.13.4",
     "sequelize": "6.18.0"
