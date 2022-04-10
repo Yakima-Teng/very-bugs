@@ -1,4 +1,6 @@
 <script setup>
+import { Setting } from '@element-plus/icons-vue'
+
 import imgLogo from '../assets/logo.png'
 import { useSiteStore } from '../stores/useSiteStore.js'
 
@@ -8,7 +10,7 @@ const site = useSiteStore()
 <template>
   <div class="site-header">
     <a class="site-title-wrapper" href="/">
-      <img :src="imgLogo" alt="" class="site-logo">
+      <img :src="imgLogo" alt="" :class="['site-logo', { rotate: !site.showSidebar }]" @click.stop.prevent="site.toggleSidebar">
       <h1 class="site-title">{{ site.title }}-{{ site.desc }}</h1>
     </a>
     <div class="site-header-toolbar">
@@ -34,6 +36,7 @@ const site = useSiteStore()
   justify-content: space-between;
   height: 100%;
   background-color: #b3c0d1;
+  padding: 0 20px 0 10px;
 }
 .site-title-wrapper {
   display: inline-flex;
@@ -41,9 +44,14 @@ const site = useSiteStore()
   justify-content: flex-start;
   text-decoration: none;
   .site-logo {
-    width: 60px;
+    width: 50px;
     height: auto;
     border-radius: 50%;
+    transform: rotateZ(0deg);
+    transition: 300ms all linear;
+    &.rotate {
+      transform: rotateZ(-90deg);
+    }
   }
   .site-title {
     font-size: 28px;

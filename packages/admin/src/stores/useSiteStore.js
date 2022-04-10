@@ -5,12 +5,17 @@ export const useSiteStore = defineStore('site', {
         return {
             title: 'VeryBugs',
             desc: '在线bug监控和上报系统',
+            showSidebar: true,
         }
     },
     actions: {
-        updateSite({ title, desc }) {
-            this.title = title
-            this.desc = desc
+        updateSite(payload) {
+            Object.entries(payload).forEach(([key, value]) => {
+                this[key] = value
+            })
+        },
+        toggleSidebar() {
+            this.showSidebar = !this.showSidebar
         },
     },
 })
