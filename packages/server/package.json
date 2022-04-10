@@ -10,7 +10,8 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@koa/router": "10.1.1"
+    "@koa/router": "10.1.1",
+    "sqlite3": "5.0.2"
   },
   "devDependencies": {
     "koa": "2.13.4",
